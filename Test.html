@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="flash()">Flashear</button>
+    <script>
+        var flashing = false;
+
+        function flash() {
+            if (!flashing) {
+                flashing = true;
+                setInterval(() => {
+                    document.body.style.backgroundColor = document.body.style.backgroundColor == 'black' ? 'white' : 'black';
+                }, 1000 / 60);
+            } else {
+                flashing = false;
+                document.body.style.backgroundColor = 'black';
+            }
+        }
+    </script>
+</body>
+</html>
