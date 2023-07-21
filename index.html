@@ -7,18 +7,24 @@
             margin: 0;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+        #slider {
+            width: 300px;
         }
     </style>
 </head>
 <body>
+    <input type="range" min="0" max="120" value="2" class="slider" id="slider">
     <button onclick="toggleFlash()">Flashear</button>
     <script>
         var flashInterval;
         var isBlack = true;
 
         function toggleFlash() {
+            var slider = document.getElementById('slider');
             if (flashInterval) {
                 clearInterval(flashInterval);
                 document.body.style.backgroundColor = 'black';
@@ -28,7 +34,7 @@
                 flashInterval = setInterval(() => {
                     document.body.style.backgroundColor = isBlack ? 'white' : 'black';
                     isBlack = !isBlack;
-                }, 1000 / 60);
+                }, 1000 / slider.value);
             }
         }
     </script>
