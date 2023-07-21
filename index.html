@@ -23,9 +23,9 @@
     </style>
 </head>
 <body>
-    <label for="frequency-slider">Frecuencia: <span id="frequency-label">2</span> parpadeos por segundo</label>
-    <input type="range" min="0" max="200" value="20" step="1" class="slider" id="frequency-slider" oninput="updateLabel('frequency-slider', 'frequency-label', 10)">
-    
+    <label for="frequency-slider">Frecuencia: <span id="frequency-label">9.0</span> parpadeos por segundo</label>
+    <input type="range" min="0" max="200" value="0" step="1" class="slider" id="frequency-slider" oninput="updateLabel('frequency-slider', 'frequency-label', 200/3)">
+
     <label for="duration-slider">Duración del blanco: <span id="duration-label">50</span>%</label>
     <input type="range" min="0" max="100" value="50" step="1" class="slider" id="duration-slider" oninput="updateLabel('duration-slider', 'duration-label', 1)">
 
@@ -39,7 +39,7 @@
         function updateLabel(sliderId, labelId, scaleFactor) {
             var slider = document.getElementById(sliderId);
             var label = document.getElementById(labelId);
-            label.textContent = slider.value / scaleFactor;
+            label.textContent = (slider.value / scaleFactor + 9).toFixed(3);
         }
 
         function toggleFlash() {
@@ -56,7 +56,7 @@
         function flash() {
             var frequencySlider = document.getElementById('frequency-slider');
             var durationSlider = document.getElementById('duration-slider');
-            flashFrequency = frequencySlider.value / 10;
+            flashFrequency = frequencySlider.value / (200/3) + 9;
             whiteDuration = durationSlider.value / 100;
             document.body.style.backgroundColor = isBlack ? 'black' : 'white';
             isBlack = !isBlack;
