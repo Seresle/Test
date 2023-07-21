@@ -2,33 +2,34 @@
 <html>
 <head>
     <style>
-        #colorDiv {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
+        body {
             background-color: black;
-        }
-        #changeColorButton {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
 <body>
-    <div id="colorDiv"></div>
-    <button id="changeColorButton" onclick="changeColor()">Cambiar color</button>
+    <button onclick="toggleFlash()">Flashear</button>
     <script>
+        var flashInterval;
         var isBlack = true;
 
-        function changeColor() {
-            var colorDiv = document.getElementById('colorDiv');
-            colorDiv.style.backgroundColor = isBlack ? 'red' : 'blue';
-            isBlack = !isBlack;
+        function toggleFlash() {
+            if (flashInterval) {
+                clearInterval(flashInterval);
+                document.body.style.backgroundColor = 'black';
+                flashInterval = null;
+                isBlack = true;
+            } else {
+                flashInterval = setInterval(() => {
+                    document.body.style.backgroundColor = isBlack ? 'white' : 'black';
+                    isBlack = !isBlack;
+                }, 1000 / 60);
+            }
         }
     </script>
 </body>
