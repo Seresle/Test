@@ -10,10 +10,15 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 0 20px; /* añadido para asegurarnos de que el contenido no toca los bordes de la pantalla */
         }
         #frequency-slider, #duration-slider {
-            width: 300px;
-            margin: 20px;
+            width: 100%; /* cambiado a 100% para que ocupe todo el ancho */
+            margin: 20px 0; /* cambiado para mantener el margen alrededor del control deslizante */
+        }
+        button {
+            padding: 10px 20px; /* añadido para aumentar el tamaño del botón */
+            font-size: 18px; /* añadido para aumentar el tamaño del texto del botón */
         }
     </style>
 </head>
