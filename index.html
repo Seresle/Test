@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hola Mundo</title>
+    <style>
+        #colorDiv {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: black;
+        }
+        #changeColorButton {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hola Mundo</h1>
-    <p>¡Bienvenido al mundo de HTML!</p>
+    <div id="colorDiv"></div>
+    <button id="changeColorButton" onclick="changeColor()">Cambiar color</button>
+    <script>
+        var isBlack = true;
+
+        function changeColor() {
+            var colorDiv = document.getElementById('colorDiv');
+            colorDiv.style.backgroundColor = isBlack ? 'white' : 'black';
+            isBlack = !isBlack;
+        }
+    </script>
 </body>
 </html>
