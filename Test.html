@@ -13,19 +13,26 @@
     </style>
 </head>
 <body>
-    <button onclick="flash()">Flashear</button>
+    <button onclick="toggleFlash()">Flashear</button>
     <script>
-        var flashing = false;
+        var flashInterval;
+        var isBlack = true;
 
-        function flash() {
-            if (!flashing) {
-                flashing = true;
-                setInterval(() => {
-                    document.body.style.backgroundColor = document.body.style.backgroundColor == 'black' ? 'white' : 'black';
-                }, 1000 / 60);
-            } else {
-                flashing = false;
+        function toggleFlash() {
+            if (flashInterval) {
+                clearInterval(flashInterval);
                 document.body.style.backgroundColor = 'black';
+                flashInterval = null;
+            } else {
+                flashInterval = setInterval(() => {
+                    if (isBlack) {
+                        document.body.style.backgroundColor = 'white';
+                        isBlack = false;
+                    } else {
+                        document.body.style.backgroundColor = 'black';
+                        isBlack = true;
+                    }
+                }, 1000 / 60);
             }
         }
     </script>
