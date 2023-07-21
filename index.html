@@ -11,31 +11,52 @@
             justify-content: center;
             align-items: center;
         }
-        #slider {
+        #frequency-slider, #duration-slider {
             width: 300px;
+            margin: 20px;
         }
     </style>
 </head>
 <body>
-    <input type="range" min="0" max="120" value="2" class="slider" id="slider">
+    <label for="frequency-slider">Frecuencia: <span id="frequency-label">2</span> parpadeos por segundo</label>
+    <input type="range" min="0" max="120" value="2" class="slider" id="frequency-slider" oninput="updateLabel('frequency-slider', 'frequency-label')">
+    
+    <label for="duration-slider">Duración del blanco: <span id="duration-label">50</span>%</label>
+    <input type="range" min="0" max="100" value="50" class="slider" id="duration-slider" oninput="updateLabel('duration-slider', 'duration-label')">
+
     <button onclick="toggleFlash()">Flashear</button>
     <script>
         var flashInterval;
         var isBlack = true;
+        var flashFrequency;
+        var whiteDuration;
+
+        function updateLabel(sliderId, labelId) {
+            var slider = document.getElementById(sliderId);
+            var label = document.getElementById(labelId);
+            label.textContent = slider.value;
+        }
 
         function toggleFlash() {
-            var slider = document.getElementById('slider');
             if (flashInterval) {
                 clearInterval(flashInterval);
                 document.body.style.backgroundColor = 'black';
                 flashInterval = null;
                 isBlack = true;
             } else {
-                flashInterval = setInterval(() => {
-                    document.body.style.backgroundColor = isBlack ? 'white' : 'black';
-                    isBlack = !isBlack;
-                }, 1000 / slider.value);
+                flash();
             }
+        }
+
+        function flash() {
+            var frequencySlider = document.getElementById('frequency-slider');
+            var durationSlider = document.getElementById('duration-slider');
+            flashFrequency = frequencySlider.value;
+            whiteDuration = durationSlider.value / 100;
+            document.body.style.backgroundColor = isBlack ? 'black' : 'white';
+            isBlack = !isBlack;
+            var intervalDuration = isBlack ? (1 - whiteDuration) * (1000 / flashFrequency) : whiteDuration * (1000 / flashFrequency);
+            flashInterval = setTimeout(flash, intervalDuration);
         }
     </script>
 </body>
